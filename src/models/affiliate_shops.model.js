@@ -5,14 +5,16 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const profiles = sequelizeClient.define('profiles', {
-    
+  const affiliate_shops = sequelizeClient.define('affiliate_shops', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
-
   }, {
     
     underscored: true,
@@ -21,15 +23,18 @@ module.exports = function (app) {
         options.raw = true;
       }
     }
-
+    
   });
 
   // eslint-disable-next-line no-unused-vars
-  profiles.associate = function (models) {
+  affiliate_shops.associate = function (models) {
+
+    const { products} = models;
+
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
-
+    affiliate_shops.belongsToMany(products, {through: 'affiliate_shops_products'}); // agrega la columna 'affiliate_shop_id' a la tabla 'affiliate_shops_products'
   };
 
-  return profiles;
+  return affiliate_shops;
 };

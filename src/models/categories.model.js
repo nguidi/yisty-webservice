@@ -5,7 +5,7 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const profiles = sequelizeClient.define('profiles', {
+  const categories = sequelizeClient.define('categories', {
     
     name: {
       type: DataTypes.STRING,
@@ -25,11 +25,10 @@ module.exports = function (app) {
   });
 
   // eslint-disable-next-line no-unused-vars
-  profiles.associate = function (models) {
+  categories.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
-
   };
 
-  return profiles;
+  return categories;
 };

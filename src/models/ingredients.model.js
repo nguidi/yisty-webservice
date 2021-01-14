@@ -5,8 +5,8 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const profiles = sequelizeClient.define('profiles', {
-    
+  const ingredients = sequelizeClient.define('ingredients', {
+
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -14,22 +14,26 @@ module.exports = function (app) {
     }
 
   }, {
-    
+
     underscored: true,
     hooks: {
       beforeCount(options) {
         options.raw = true;
       }
     }
-
+    
   });
 
   // eslint-disable-next-line no-unused-vars
-  profiles.associate = function (models) {
+  ingredients.associate = function (models) {
+
+    const { products, user_complaints } = models;
+
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
-
+    ingredients.belongsToMany(products, {through: 'product_ingredients'}); // agrega la columna 'ingredient_id' a la tabla 'product_ingredients'
+    ingredients.belongsToMany(user_complaints, {through: 'complaint_ingredients'}); // agrega la columna 'ingredient_id' a la tabla 'complaint_ingredients'
   };
 
-  return profiles;
+  return ingredients;
 };

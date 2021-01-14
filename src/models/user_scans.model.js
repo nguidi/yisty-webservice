@@ -5,16 +5,20 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const profiles = sequelizeClient.define('profiles', {
-    
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
+  const user_scans = sequelizeClient.define('user_scans', {
+
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+
+    result: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
     }
 
   }, {
-    
+
     underscored: true,
     hooks: {
       beforeCount(options) {
@@ -25,11 +29,10 @@ module.exports = function (app) {
   });
 
   // eslint-disable-next-line no-unused-vars
-  profiles.associate = function (models) {
+  user_scans.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
-
   };
 
-  return profiles;
+  return user_scans;
 };

@@ -9,7 +9,7 @@
   "authentication": {
     "entity": "user",
     "service": "users",
-    "secret": "9hheXiyVSYCsLyl6+788xDWeBjw=",
+    "secret": "Z/d4BlwGNE3MuVZY8DhKKRLr+Fc=",
     "authStrategies": [
       "jwt",
       "local"
@@ -18,7 +18,7 @@
       "header": {
         "typ": "access"
       },
-      "audience": "https://yourdomain.com",
+      "audience": "https://yisty.com",
       "issuer": "feathers",
       "algorithm": "HS256",
       "expiresIn": "1d"
@@ -26,19 +26,7 @@
     "local": {
       "usernameField": "email",
       "passwordField": "password"
-    },
-    "oauth": {
-      "redirect": "/",
-      "google": {
-        "key": "<google oauth key>",
-        "secret": "<google oauth secret>",
-        "scope": [
-          "email",
-          "profile",
-          "openid"
-        ]
-      }
     }
   },
-  "postgres": "postgres://postgres:@localhost:5432/yisty_backend"
+  "postgres": "postgres://postgres:drowssap@localhost:5432/yisty"
 }

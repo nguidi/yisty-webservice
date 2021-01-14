@@ -5,16 +5,20 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const profiles = sequelizeClient.define('profiles', {
-    
+  const manufacturers = sequelizeClient.define('manufacturers', {
+
     name: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
+    },
+
+    image: {
+      type: DataTypes.STRING
     }
 
   }, {
-    
+
     underscored: true,
     hooks: {
       beforeCount(options) {
@@ -25,11 +29,10 @@ module.exports = function (app) {
   });
 
   // eslint-disable-next-line no-unused-vars
-  profiles.associate = function (models) {
+  manufacturers.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
-
   };
 
-  return profiles;
+  return manufacturers;
 };
