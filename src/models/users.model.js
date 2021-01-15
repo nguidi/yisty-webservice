@@ -23,7 +23,7 @@ module.exports = function (app) {
   
   }, {
 
-    underscored: true,
+    underscored: true,  // userID -> user_id
     hooks: {
       beforeCount(options) {
         options.raw = true;

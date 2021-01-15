@@ -43,3 +43,24 @@ $ feathers help                           # Show all commands
 ## Help
 
 For more information on all the things you can do with Feathers visit [docs.feathersjs.com](http://docs.feathersjs.com).
+
+## TODO: Documentar bien estos metodos. 
+
+Crear los metodos restantes.
+
+Login 	 -> POST 	/authentication
+Logout 	 -> DELETE	/authentication/id
+Register -> POST	/users
+Editar Perfil -> PUT	/users/id
+
+Preferencias Alimenticias -> GET /food_preferences
+
+Noticias -> GET	/news (API GOOGLE)
+Busqueda Alimentos -> GET /products?food_preference=1
+Escaneo
+	BARCODE  -> GET /products?barcode=123456789
+	IMG_INGREDIENTES -> POST /scan
+	NUEVO_PRODUCTO	POST /pending_products
+Publicidad Producto -> GET /affiliate_shops?products=1
+	
+Historial Producto -> GET /user_scans?user_id=1
