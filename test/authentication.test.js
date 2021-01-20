@@ -27,7 +27,7 @@ describe('authentication', () => {
         ...userInfo
       });
 
-      await app.service('users').remove(user.id);
+      //await app.service('users').remove(user.id);
       
       assert.ok(accessToken, 'Created access token for user');
       assert.ok(user, 'Includes user in authentication data');

@@ -17,8 +17,17 @@ Getting up and running is as easy as 1, 2, 3.
     cd path/to/yisty-webservice
     npm install
     ```
+3. Setup app
 
-3. Start your app
+    ```
+    npm run setup
+    ```
+4. Test the app
+
+    ```
+    npm run test
+    ```
+5. Start your app
 
     ```
     npm start
@@ -48,6 +57,7 @@ For more information on all the things you can do with Feathers visit [docs.feat
 
 Crear los metodos restantes.
 
+```
 Login 	 -> POST 	/authentication
 Logout 	 -> DELETE	/authentication/id
 Register -> POST	/users
@@ -55,7 +65,6 @@ Editar Perfil -> PUT	/users/id
 
 Preferencias Alimenticias -> GET /food_preferences
 
-Noticias -> GET	/news (API GOOGLE)
 Busqueda Alimentos -> GET /products?food_preference=1
 Escaneo
 	BARCODE  -> GET /products?barcode=123456789
@@ -64,3 +73,4 @@ Escaneo
 Publicidad Producto -> GET /affiliate_shops?products=1
 	
 Historial Producto -> GET /user_scans?user_id=1
+```

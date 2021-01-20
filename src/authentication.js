@@ -9,22 +9,29 @@ module.exports = app => {
   authentication.register('local', new LocalStrategy());
 
   authentication.docs = {
-    description: 'A service to send and receive messages',
-    definitions: {
-      messages: {
-        'type': 'object',
-        'required': [
-          'text'
-        ],
-        'properties': {
-          'text': {
-            'type': 'string',
-            'description': 'The message text'
-          },
-          'userId': {
-            'type': 'string',
-            'description': 'The id of the user that sent the message'
+    description: 'Permite autentificarse frente al Webservice',
+    paths: {
+      '/authentication': {
+        'post': {
+          "description": "Returns all pets from the system that the user has access to",
+          "responses": {
+            "200": {          
+              "description": "A list of pets.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/pet"
+                    }
+                  }
+                }
+              }
+            }
           }
+        },
+        'delete': {
+
         }
       }
     }

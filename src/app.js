@@ -4,6 +4,10 @@ const compress = require('compression');
 const helmet = require('helmet');
 const cors = require('cors');
 const logger = require('./logger');
+const SendGrid = require('@sendgrid/mail');
+console.log(process.env.SENDGRID_API_KEY)
+
+SendGrid.setApiKey(process.env.SENDGRID_API_KEY);
 
 const feathers = require('@feathersjs/feathers');
 const configuration = require('@feathersjs/configuration');
@@ -64,5 +68,8 @@ app.use(express.notFound());
 app.use(express.errorHandler({ logger }));
 
 app.hooks(appHooks);
+
+app.set('SendGrid',SendGrid)
+app.set('activation_endpoint',app.host+'/activate')
 
 module.exports = app;
