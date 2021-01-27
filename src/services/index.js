@@ -8,6 +8,8 @@ const products = require('./products/products.service.js');
 const manufacturers = require('./manufacturers/manufacturers.service.js');
 const userComplaints = require('./user_complaints/user_complaints.service.js');
 const userScans = require('./user_scans/user_scans.service.js');
+const pendingProducts = require('./pending_products/pending_products.service.js');
+const pendingIngredients = require('./pending_ingredients/pending_ingredients.service.js');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(profiles);
@@ -20,4 +22,6 @@ module.exports = function (app) {
   app.configure(manufacturers);
   app.configure(userComplaints);
   app.configure(userScans);
+  app.configure(pendingProducts);
+  app.configure(pendingIngredients);
 };

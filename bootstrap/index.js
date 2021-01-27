@@ -1,7 +1,6 @@
 const config = require('../config/default.json');
 const { Client } = require('pg');
 const { Sequelize } = require('sequelize');
-//const tables = require('./tables.js');
 const URL = require('url').URL
 
 
