@@ -1,4 +1,9 @@
-module.exports = function (req, res) { 
+module.exports = function (Worker) {
 
-    res.send('hola')
+    return function (req, res) { 
+
+        res.send('hola')
+        
+    }
+
 }

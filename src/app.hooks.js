@@ -1,5 +1,6 @@
-// Application hooks that run for every service
+const omit = require('./hooks/omit.js')
 
+// Application hooks that run for every service
 module.exports = {
   before: {
     all: [],

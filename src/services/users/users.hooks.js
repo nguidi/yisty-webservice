@@ -1,8 +1,16 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
+const { hashPassword, protect } = require('@feathersjs/authentication-local').hooks;
+const { populate } = require('feathers-hooks-common')
+const omit = require('../../hooks/omit.js')
 
-const {
-  hashPassword, protect
-} = require('@feathersjs/authentication-local').hooks;
+const userProfileRelation = {
+  include: {
+    service: 'profiles',
+    nameAs: 'profile',
+    parentField: 'profileId',
+    childField: 'id'
+  }
+}
 
 async function setDefaultUserParams(hook) {
   // Seteamos que este desactivado por defecto, para que lo activen por mail
@@ -51,10 +59,16 @@ module.exports = {
       // Always must be the last hook
       protect('password')
     ],
-    find: [],
-    get: [],
+    find: [ 
+      populate({ schema: userProfileRelation}),
+      omit(['profileId', '_include'])
+    ],
+    get: [
+      populate({ schema: userProfileRelation}),
+      omit(['profileId', '_include'])
+    ],
     create: [
-      sendActivationEmail
+      //sendActivationEmail
     ],
     update: [],
     patch: [],
