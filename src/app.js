@@ -4,10 +4,8 @@ const compress = require('compression');
 const helmet = require('helmet');
 const cors = require('cors');
 const logger = require('./logger');
-const SendGrid = require('@sendgrid/mail');
-console.log(process.env.SENDGRID_API_KEY)
-
-SendGrid.setApiKey(process.env.SENDGRID_API_KEY);
+//const SendGrid = require('@sendgrid/mail');
+//SendGrid.setApiKey(process.env.SENDGRID_API_KEY);
 
 const feathers = require('@feathersjs/feathers');
 const configuration = require('@feathersjs/configuration');
@@ -18,6 +16,7 @@ const socketio = require('@feathersjs/socketio');
 // documentation
 const sequelizeToJsonSchemas = require('./documentation/sequelize-to-json-schemas.js');
 const swagger = require('./documentation/swagger.js');
+//const swagger = require('feathers-swagger');
 
 
 const middleware = require('./middleware');
@@ -58,6 +57,7 @@ app.configure(swagger);
 // Configure other middleware (see `middleware/index.js`)
 app.configure(middleware);
 app.configure(authentication);
+
 // Set up our services (see `services/index.js`)
 app.configure(services);
 // Set up event channels (see channels.js)
@@ -69,7 +69,7 @@ app.use(express.errorHandler({ logger }));
 
 app.hooks(appHooks);
 
-app.set('SendGrid',SendGrid)
-app.set('activation_endpoint',app.host+'/activate')
+//app.set('SendGrid',SendGrid)
+//app.set('activation_endpoint',app.host+'/activate')
 
 module.exports = app;

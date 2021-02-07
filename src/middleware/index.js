@@ -6,6 +6,6 @@ module.exports = function (app) {
   // in Express, the order matters.
 
   // Scanea la picture
-  app.post('/scan', scanMethod);
+  app.post('/scan', scanMethod(app.get('TesseractWorker')));
 
 };
