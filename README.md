@@ -33,6 +33,23 @@ Getting up and running is as easy as 1, 2, 3.
     npm start
     ```
 
+
+## Docker setup
+
+You can also run the application and the database within docker containers using
+Docker Compose.
+To do that you need to first build the application image:
+
+```bash
+docker build . -t yisty_webservice:latest
+```
+
+After that we can start the whole system:
+
+```bash
+docker-compose up
+```
+
 ## Testing
 
 Simply run `npm test` and all your tests in the `test/` directory will be run.
