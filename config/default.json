@@ -28,5 +28,5 @@
             "passwordField": "password"
         }
     },
-    "postgres": "postgres://postgres:drowssap@db:5432/yisty"
+    "postgres": "postgres://postgres:drowssap@localhost:5432/yisty"
 }

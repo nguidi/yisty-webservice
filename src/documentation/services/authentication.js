@@ -330,7 +330,19 @@ module.exports = {
                                     "active": false,
                                     "createdAt": "2021-01-19T23:46:44.297Z",
                                     "updatedAt": "2021-01-19T23:46:44.297Z",
-                                    "profileId": null
+                                    "profile": {
+                                        "id": 2,
+                                        "name": "Cliente",
+                                        "createdAt": "2021-02-07T23:26:49.706Z",
+                                        "updatedAt": "2021-02-07T23:26:49.706Z"
+                                    },
+                                    "food_preference": {
+                                        "id": 3,
+                                        "name": "Vegetariano",
+                                        "description": "Alguien que no come carne",
+                                        "createdAt": "2021-02-07T23:34:26.075Z",
+                                        "updatedAt": "2021-02-07T23:34:26.075Z"
+                                    }
                                 }
                             }
                         }

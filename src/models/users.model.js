@@ -43,8 +43,9 @@ module.exports = function (app) {
 
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
-    users.belongsTo(profiles);  // agrega la columna profile_id a user    
-    users.belongsToMany(food_preferences, {through: 'user_food_preferences'}); // crea una nueva tabla llamada 'user_food_preferences' con una columna user_id
+    users.belongsTo(profiles);  // agrega la columna profile_id a user
+    users.belongsTo(food_preferences);  // agrega la columna food_preference_id a user    
+    //users.belongsToMany(food_preferences, {through: 'user_food_preferences'}); // crea una nueva tabla llamada 'user_food_preferences' con una columna user_id
     users.hasMany(user_scans); // agrega la columna 'user_id' a la tabla 'user_scans'
     users.hasMany(user_complaints); // agrega la columna 'user_id' a la tabla 'user_complaints'
     users.hasMany(pending_products); // agrega la columna 'user_id' a la tabla 'pending_products'

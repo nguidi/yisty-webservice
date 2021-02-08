@@ -12,12 +12,21 @@ const userProfileRelation = {
   }
 }
 
+const userFoodPreferenceRelation = {
+  include: {
+    service: 'food_preferences',
+    nameAs: 'food_preference',
+    parentField: 'foodPreferenceId',
+    childField: 'id'
+  }
+}
+
 async function setDefaultUserParams(hook) {
   // Seteamos que este desactivado por defecto, para que lo activen por mail
   hook.data.active = false;
 
   // Fijamos el perfil 2 (Cliente) si no viene con un perfil, por defecto, lo que hace la app de celular
-  if (!hook.data.profile_id) hook.data.profile_id = 2;
+  if (!hook.data.profileId) hook.data.profileId = 2;
 }
 
 async function sendActivationEmail(hook) {
@@ -65,7 +74,8 @@ module.exports = {
     ],
     get: [
       populate({ schema: userProfileRelation}),
-      omit(['profileId', '_include'])
+      populate({ schema: userFoodPreferenceRelation}),
+      omit(['profileId', 'foodPreferenceId', '_include'])
     ],
     create: [
       //sendActivationEmail

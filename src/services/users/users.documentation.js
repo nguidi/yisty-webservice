@@ -200,6 +200,13 @@ module.exports = {
                                     "name": "Administrador",
                                     "createdAt": "2021-02-01T14:17:29.655Z",
                                     "updatedAt": "2021-02-01T14:17:29.655Z"
+                                },
+                                "food_preference": {
+                                    "id": 3,
+                                    "name": "Vegetariano",
+                                    "description": "Alguien que no come carne",
+                                    "createdAt": "2021-02-07T23:34:26.075Z",
+                                    "updatedAt": "2021-02-07T23:34:26.075Z"
                                 }
                             }
                         }
@@ -257,7 +264,8 @@ module.exports = {
                             "email": "someone@someone.net",
                             "full_name": "Some One",
                             "password": "someone",
-                            "profileId": 1
+                            "profileId": 1,
+                            "foodPreferenceId": 3
                         }
                     }
                 }
@@ -283,6 +291,13 @@ module.exports = {
                                     "name": "Administrador",
                                     "createdAt": "2021-02-01T14:17:29.655Z",
                                     "updatedAt": "2021-02-01T14:17:29.655Z"
+                                },
+                                "food_preference": {
+                                    "id": 3,
+                                    "name": "Vegetariano",
+                                    "description": "Alguien que no come carne",
+                                    "createdAt": "2021-02-07T23:34:26.075Z",
+                                    "updatedAt": "2021-02-07T23:34:26.075Z"
                                 }
                             }
                         }
