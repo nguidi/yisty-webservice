@@ -9,9 +9,7 @@ async function streamToString(stream) {
 
 async function doScan(worker, image) {
     try {
-        const {
-            data: { text },
-        } = await worker.recognize(image);
+        const { data: { text } } = await worker.recognize(image);
         return text;
     } catch (e) {
         console.log(e);
@@ -27,7 +25,6 @@ module.exports = (app) => {
             scannedText = await streamToString(req).then(image => {
                 return doScan(worker, image);
             });
-
             res.writeHead(200, { "Content-Type": "text/plain" }).end(scannedText);
         } catch (e) {
             console.log(e);
