@@ -1,8 +1,8 @@
 const { Service } = require('feathers-sequelize');
-const docs = require('./user_scans.documentation');
+const docs = require('./products_food_preferences.documentation');
 
-exports.UserScans = class UserScans extends Service {
-
+exports.ProductsFoodPreferences = class ProductsFoodPreferences extends Service {
+  
     constructor(options, app) {
         
         super(options, app);

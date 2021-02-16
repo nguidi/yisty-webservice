@@ -14,7 +14,7 @@ module.exports = app => {
         version: '1.0.0',
       },
     },
-    ignore: { paths: [ 'user_scans' ] },
+    ignore: { paths: [ ] },
     defaults: {
       schemasGenerator(service, model, modelName) {
         if (service.options && service.options.Model) {
