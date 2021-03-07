@@ -59,6 +59,7 @@
         "pg": "^8.5.1",
         "sequelize": "^6.5.0",
         "serve-favicon": "^2.5.0",
+        "tesseract.js": "^2.1.4",
         "winston": "^3.3.3"
     },
     "devDependencies": {
