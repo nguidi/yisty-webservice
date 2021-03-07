@@ -36,11 +36,12 @@ module.exports = function (app) {
   // eslint-disable-next-line no-unused-vars
   user_complaints.associate = function (models) {
 
-    const { ingredients } = models;
+    const { ingredients, users } = models;
 
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
     user_complaints.belongsToMany(ingredients, {through: 'complaint_ingredients'}); // agrega la columna 'user_complaint_id' a la tabla 'complaint_ingredients'
+    user_complaints.belongsTo(users); // agrega la columna 'user_id' a la tabla 'user_complaints'
   };
 
   return user_complaints;

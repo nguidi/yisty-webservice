@@ -39,7 +39,7 @@ module.exports = function (app) {
   // eslint-disable-next-line no-unused-vars
   users.associate = function (models) {
 
-    const { profiles, food_preferences, user_scans, user_complaints, pending_products } = models;
+    const { profiles, food_preferences, user_scans, user_complaints, pending_products, affiliate_shops } = models;
 
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
@@ -49,6 +49,7 @@ module.exports = function (app) {
     users.hasMany(user_scans); // agrega la columna 'user_id' a la tabla 'user_scans'
     users.hasMany(user_complaints); // agrega la columna 'user_id' a la tabla 'user_complaints'
     users.hasMany(pending_products); // agrega la columna 'user_id' a la tabla 'pending_products'
+    users.belongsToMany(affiliate_shops, {through: 'user_affiliate_shops'}); // agrega la columna 'user_id' a la tabla 'user_affiliate_shops'
   };
 
   return users;

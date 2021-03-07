@@ -30,8 +30,12 @@ module.exports = function (app) {
 
   // eslint-disable-next-line no-unused-vars
   user_scans.associate = function (models) {
+
+    const { users } = models;
+
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
+    user_scans.belongsTo(users); // agrega la columna 'user_id' a la tabla 'user_scans'
   };
 
   return user_scans;

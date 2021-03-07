@@ -29,11 +29,12 @@ module.exports = function (app) {
   // eslint-disable-next-line no-unused-vars
   affiliate_shops.associate = function (models) {
 
-    const { products} = models;
+    const { users, products} = models;
 
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
     affiliate_shops.belongsToMany(products, {through: 'affiliate_shops_products'}); // agrega la columna 'affiliate_shop_id' a la tabla 'affiliate_shops_products'
+    affiliate_shops.belongsToMany(users, {through: 'user_affiliate_shops'}); // agrega la columna 'affiliate_shop_id' a la tabla 'user_affiliate_shops'
   };
 
   return affiliate_shops;
