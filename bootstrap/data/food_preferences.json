@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "name": "Vegetariano",
+        "description": "Régimen alimentario basado en el consumo de frutas, verduras y legumbres. Se caracteriza por la abstención del consumo de carne y pescado"
+    },
+    {
+        "id": 2,
+        "name": "Vegano",
+        "description": "Régimen dietético que se caracteriza por excluir completamente todos los alimentos de origen animal, incluidos los productos que suponen un proceso animal, como la miel o los huevos de la lista de comida que consumen a diario."
+    }
+]

@@ -1,0 +1,62 @@
+[
+    {
+        "food_preference_id": 1,
+        "ingredient_id": 1
+    },
+    {
+        "food_preference_id": 1,
+        "ingredient_id": 2
+    },
+    {
+        "food_preference_id": 1,
+        "ingredient_id": 3
+    },
+    {
+        "food_preference_id": 1,
+        "ingredient_id": 4
+    },
+    {
+        "food_preference_id": 1,
+        "ingredient_id": 5
+    },
+    {
+        "food_preference_id": 2,
+        "ingredient_id": 6
+    },
+    {
+       "food_preference_id": 2,
+        "ingredient_id": 7
+    },
+    {
+        "food_preference_id": 2,
+        "ingredient_id": 8
+    },
+    {
+        "food_preference_id": 2,
+        "ingredient_id": 9
+    },
+    {
+        "food_preference_id": 2,
+        "ingredient_id": 10
+    },
+    {
+        "food_preference_id": 2,
+        "ingredient_id": 1
+    },
+    {
+        "food_preference_id": 2,
+        "ingredient_id": 2
+    },
+    {
+        "food_preference_id": 2,
+        "ingredient_id": 3
+    },
+    {
+        "food_preference_id": 2,
+        "ingredient_id": 4
+    },
+    {
+        "food_preference_id": 2,
+        "ingredient_id": 5
+    }
+]

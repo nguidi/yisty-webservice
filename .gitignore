@@ -108,6 +108,5 @@ $RECYCLE.BIN/
 
 # Others
 lib/
-data/
 sendgrid.env
 todo.md

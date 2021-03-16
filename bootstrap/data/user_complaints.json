@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "user_id": 2,
+        "product_id": 3,
+        "date": "2021-03-05 19:10:45.541051-03",
+        "description": "El ingrediente INS423 no es vegano!!",
+        "active": true
+    },
+    {
+        "id": 2,
+        "user_id": 2,
+        "product_id": 3,
+        "date": "2021-03-05 19:10:45.541051-03",
+        "description": "El ingrediente INS481i no es vegano!!",
+        "active": false
+    }
+]

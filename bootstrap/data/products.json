@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Diveresión",
+        "image": "https://ardiaprod.vteximg.com.br/arquivos/ids/184256-1000-1000/Galletitas-Dulces-Surtidas-Arcor-Diversion-400-Gr-_1.jpg",
+        "barcode": "7798108344679",
+        "manufacturer_id": 1,
+        "category_id": 1
+    },
+    {
+        "id": 2,
+        "name": "Liviano",
+        "image": "https://statics.dinoonline.com.ar/imagenes/full_600x600_ma/3420559_f.jpg",
+        "barcode": "7798108344680",
+        "manufacturer_id": 2,
+        "category_id": 2
+    },
+    {
+        "id": 3,
+        "name": "Balance",
+        "image": "https://www.grupoelnene.com.ar/3783-home_default/barra-cereal-bimbo-cheesecake-x23gr.jpg",
+        "barcode": "7798108344681",
+        "manufacturer_id": 2,
+        "category_id": 3
+    }
+]

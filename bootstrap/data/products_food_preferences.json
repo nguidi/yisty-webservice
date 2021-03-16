@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "food_preference_id": 1,
+        "product_id": 1,
+        "result": true
+    },
+    {
+        "id": 2,
+        "food_preference_id": 1,
+        "product_id": 2,
+        "result": true
+    },
+    {
+        "id": 3,
+        "food_preference_id": 1,
+        "product_id": 3,
+        "result": false
+    },
+    {
+        "id": 4,
+        "food_preference_id": 2,
+        "product_id": 1,
+        "result": true
+    },
+    {
+        "id": 5,
+        "food_preference_id": 2,
+        "product_id": 2,
+        "result": false
+    },
+    {
+        "id": 6,
+        "food_preference_id": 2,
+        "product_id": 3,
+        "result": false
+    }
+]

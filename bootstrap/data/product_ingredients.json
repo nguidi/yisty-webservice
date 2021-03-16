@@ -1,0 +1,66 @@
+[
+    {
+        "product_id": 1,
+        "ingredient_id": 1 
+    },
+    {
+        "product_id": 1,
+        "ingredient_id": 2 
+    },
+    {
+        "product_id": 1,
+        "ingredient_id": 3 
+    },
+    {
+        "product_id": 1,
+        "ingredient_id": 4 
+    },
+    {
+        "product_id": 1,
+        "ingredient_id": 5 
+    },
+    {
+        "product_id": 1,
+        "ingredient_id": 6 
+    },
+    {
+        "product_id": 2,
+        "ingredient_id": 1 
+    },
+    {
+        "product_id": 2,
+        "ingredient_id": 2 
+    },
+    {
+        "product_id": 2,
+        "ingredient_id": 3 
+    },
+    {
+        "product_id": 2,
+        "ingredient_id": 7 
+    },
+    {
+        "product_id": 2,
+        "ingredient_id": 8 
+    },
+    {
+        "product_id": 3,
+        "ingredient_id": 1 
+    },
+    {
+        "product_id": 3,
+        "ingredient_id": 3 
+    },
+    {
+        "product_id": 3,
+        "ingredient_id": 5 
+    },
+    {
+        "product_id": 3,
+        "ingredient_id": 7 
+    },
+    {
+        "product_id": 3,
+        "ingredient_id": 9 
+    }
+]

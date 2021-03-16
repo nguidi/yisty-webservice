@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "pending_product_id": 1,
+        "name": "Harina de trigo",
+        "status": 0
+    },
+    {
+        "id": 2,
+        "pending_product_id": 1,
+        "name": "Agua",
+        "status": 0
+    },
+    {
+        "id": 3,
+        "pending_product_id": 1,
+        "name": "oleomargarina",
+        "status": 0
+    },
+    {
+        "id": 4,
+        "pending_product_id": 1,
+        "name": "levadura",
+        "status": 0
+    },
+    {
+        "id": 5,
+        "pending_product_id": 1,
+        "name": "extracto de malta",
+        "status": 0
+    },
+    {
+        "id": 6,
+        "pending_product_id": 1,
+        "name": "INS471",
+        "status": 0
+    },
+    {
+        "id": 7,
+        "pending_product_id": 1,
+        "name": "INS481i",
+        "status": 0
+    }
+]

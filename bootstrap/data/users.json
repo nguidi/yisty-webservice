@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "email": "someone@mail.com",
+        "password": "$2a$10$cd5VtSr5bL/aTGUUcFsTN.YXSfeFjCdXhs4xqTixzQ4tZk/RJfSWW",
+        "full_name": "Some One",
+        "active": true,
+        "profile_id": 2
+    },
+    {
+        "id": 2,
+        "email": "anotherone@mail.com",
+        "password": "$2a$10$Lssy7OVUcCmLgHhMtQPyHera659H/iGQIox.fupApvFtXbu.ixwXO",
+        "full_name": "Another One",
+        "active": true,
+        "profile_id": 2
+    },
+    {
+        "id": 3,
+        "email": "admin@yisty.com",
+        "password": "$2a$10$CZ3YSojZiHwpVja.DHqDp.xmEVSk4g6G.5Tpcl8KAb1ATDsy8015C",
+        "full_name": "Yisty Admin",
+        "active": true,
+        "profile_id": 1
+    },
+    {
+        "id": 4,
+        "email": "affiliate@mail.com",
+        "password": "$2a$10$01pnSDw4dogsYFqwAqZ6EOEWpqdC.GynULVOgBwU7l68DFt/Vm6ha",
+        "full_name": "Affiliated",
+        "active": true,
+        "profile_id": 3
+    }
+]

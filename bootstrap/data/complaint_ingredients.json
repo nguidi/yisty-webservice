@@ -1,0 +1,10 @@
+[
+    {
+        "user_complaint_id": 1,
+        "ingredient_id": 7
+    },
+    {
+        "user_complaint_id": 2,
+        "ingredient_id": 8
+    }
+]
