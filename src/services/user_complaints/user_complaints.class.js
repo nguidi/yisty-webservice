@@ -3,12 +3,12 @@ const docs = require('./user_complaints.documentation');
 
 exports.UserComplaints = class UserComplaints extends Service {
   
-    constructor(options, app) {
+  constructor(options, app) {
         
-        super(options, app);
+    super(options, app);
 
-        this.docs = docs;
+    this.docs = docs;
     
-    }
+  }
 
 };

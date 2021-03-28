@@ -1,16 +1,17 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
-const { populate } = require('feathers-hooks-common')
-const omit = require('../../hooks/omit.js')
-const userQuery = require('../../hooks/userQuery.js')
+const { populate } = require('feathers-hooks-common');
+const omit = require('../../hooks/omit.js');
+const userQuery = require('../../hooks/userQuery.js');
 
-const manufacturerRelation = {
+const productRelation = {
   include: {
     service: 'products',
     nameAs: 'product',
     parentField: 'productId',
-    childField: 'id'
+    childField: 'id',
+    useInnerPopulate: true
   }
-}
+};
 
 
 module.exports = {
@@ -26,9 +27,12 @@ module.exports = {
 
   after: {
     all: [],
-    find: [],
+    find: [
+      populate({ schema: productRelation}),
+      omit(['productId', '_include'])
+    ],
     get: [
-      populate({ schema: manufacturerRelation}),
+      populate({ schema: productRelation}),
       omit(['productId', '_include'])
     ],
     create: [],

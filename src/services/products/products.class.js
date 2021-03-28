@@ -3,12 +3,12 @@ const docs = require('./products.documentation');
 
 exports.Products = class Products extends Service {
   
-    constructor(options, app) {
+  constructor(options, app) {
         
-        super(options, app);
+    super(options, app);
 
-        this.docs = docs;
+    this.docs = docs;
     
-    }
+  }
 
 };

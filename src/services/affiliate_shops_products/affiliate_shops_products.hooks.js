@@ -1,9 +1,8 @@
-const omit = require('./hooks/omit.js');
+const { authenticate } = require('@feathersjs/authentication').hooks;
 
-// Application hooks that run for every service
 module.exports = {
   before: {
-    all: [],
+    all: [ authenticate('jwt') ],
     find: [],
     get: [],
     create: [],

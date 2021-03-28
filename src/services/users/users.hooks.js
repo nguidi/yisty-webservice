@@ -1,7 +1,7 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
 const { hashPassword, protect } = require('@feathersjs/authentication-local').hooks;
-const { populate } = require('feathers-hooks-common')
-const omit = require('../../hooks/omit.js')
+const { populate } = require('feathers-hooks-common');
+const omit = require('../../hooks/omit.js');
 
 const userProfileRelation = {
   include: {
@@ -10,7 +10,7 @@ const userProfileRelation = {
     parentField: 'profileId',
     childField: 'id'
   }
-}
+};
 
 const userFoodPreferenceRelation = {
   include: {
@@ -19,7 +19,7 @@ const userFoodPreferenceRelation = {
     parentField: 'foodPreferenceId',
     childField: 'id'
   }
-}
+};
 
 async function setDefaultUserParams(hook) {
   // Seteamos que este desactivado por defecto, para que lo activen por mail
@@ -38,7 +38,7 @@ async function sendActivationEmail(hook) {
     from: 'neri.guidi@gmail.com', // Use the email address or domain you verified above
     subject: 'Activa tu cuenta salamin',
     html: `<strong>Apreta el siguiente link si queres vivir: ${hook.app.get('activation_endpoint')} </strong>`,
-  })
+  });
 
   let result = await SendGrid.send({
     to: hook.result.email,
@@ -47,7 +47,7 @@ async function sendActivationEmail(hook) {
     html: `<strong>Apreta el siguiente link si queres vivir: ${hook.app.get('activation_endpoint')} </strong>`,
   });
 
-  console.log(result)
+  console.log(result);
 }
 
 

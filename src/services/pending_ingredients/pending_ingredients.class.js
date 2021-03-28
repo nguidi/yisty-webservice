@@ -3,12 +3,12 @@ const docs = require('./pending_ingredients.documentation');
 
 exports.PendingIngredients = class PendingIngredients extends Service {
   
-    constructor(options, app) {
+  constructor(options, app) {
         
-        super(options, app);
+    super(options, app);
 
-        this.docs = docs;
+    this.docs = docs;
     
-    }
+  }
 
 };

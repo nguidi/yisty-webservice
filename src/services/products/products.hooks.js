@@ -1,6 +1,6 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
-const { populate, iff } = require('feathers-hooks-common')
-const omit = require('../../hooks/omit.js')
+const { populate, iff } = require('feathers-hooks-common');
+const omit = require('../../hooks/omit.js');
 
 const categoryRelation = {
   include: {
@@ -9,7 +9,7 @@ const categoryRelation = {
     parentField: 'categoryId',
     childField: 'id'
   }
-}
+};
 
 const manufacturerRelation = {
   include: {
@@ -18,25 +18,90 @@ const manufacturerRelation = {
     parentField: 'manufacturerId',
     childField: 'id'
   }
-}
+};
+
 
 async function populateProductFoodPreference(context) {
 
-  let foodPreference = context.params.user.foodPreference;
+  let foodPreference = context.params.user.food_preference.id;
 
-  context.result.data = await context.result.data.map( async product => {
-    product.foodPreference = (await context.app.service('products_food_preferences').find({ query: { product_id: product.id, food_preference_id: foodPreference }})).pop()
-  })
+  let dataToTransform = (Array.isArray(context.result)) ? context.result : (context.result.data || [context.result]) ;
 
-  return context
+  dataToTransform = await Promise.all(dataToTransform.map( async product => {
+    product.foodPreference = (await context.app.service('products_food_preferences').find({ query: { product_id: product.id, food_preference_id: foodPreference }})).data.pop().result;
+    return product;
+  }));
 
+  if (Array.isArray(context.result)) {
+    context.result = dataToTransform;
+  } else {
+    if (context.result.data) {
+      context.result.data = dataToTransform;
+    } else {
+      context.result = dataToTransform
+    }
+  }
+
+  return context;
+
+}
+
+async function populateAffilateShopRelation(context) {
+
+  let client = context.app.get('sequelizeClient');
+
+  let dataToTransform = (Array.isArray(context.result)) ? context.result : (context.result.data || [context.result]) ;
+
+  dataToTransform = await Promise.all(dataToTransform.map( async product => {
+  
+    let list = await client.models.affiliate_shops_products.findAll({
+      where: {
+        productId: product.id
+      },
+      raw: true
+    });
+
+    if (list.length > 0) {
+      product.affiliateShops = await Promise.all(list.map( async afs => {
+        let shop = (await context.app.service('affiliate_shops').get(afs.affiliateShopId));
+        return Object.assign({ url: afs.url, description: afs.description}, shop);
+      }));
+    }
+    
+    return product;
+  
+  }));
+
+  if (Array.isArray(context.result)) {
+    context.result = dataToTransform;
+  } else {
+    if (context.result.data) {
+      context.result.data = dataToTransform;
+    } else {
+      context.result = dataToTransform
+    }
+  }
+
+  return context;
+}
+
+function verifyPopulateVars(context) {
+  if (typeof context.params.query.affiliateShops !== 'undefined') {
+    context.params['$populateAffiliatedShops'] = true;
+    delete context.params.query.affiliateShops;
+  }
+  return context;
 }
 
 module.exports = {
   before: {
     all: [ authenticate('jwt') ],
-    find: [],
-    get: [],
+    find: [
+      verifyPopulateVars
+    ],
+    get: [
+      verifyPopulateVars
+    ],
     create: [],
     update: [],
     patch: [],
@@ -46,15 +111,17 @@ module.exports = {
   after: {
     all: [],
     find: [
-      iff(context => (context.params.user.profile == 2), populateProductFoodPreference), // Si soy un mero user
+      iff(context => (context.params.user.profile.id == 2), populateProductFoodPreference), // Si soy un mero user
       populate({ schema: categoryRelation}),
       populate({ schema: manufacturerRelation}),
-      omit(['categoryId', 'manufacturerId', '_include'])
+      omit(['categoryId', 'manufacturerId', 'foodPreferenceId', '_include']),
+      iff(context => (context.params.$populateAffiliatedShops == true), populateAffilateShopRelation), // Si soy quiero traer los afiliados
     ],
     get: [
       populate({ schema: categoryRelation}),
       populate({ schema: manufacturerRelation}),
-      omit(['categoryId', 'manufacturerId', '_include'])
+      omit(['categoryId', 'manufacturerId', 'foodPreferenceId', '_include']),
+      iff(context => (context.params.$populateAffiliatedShops == true), populateAffilateShopRelation), // Si soy quiero traer los afiliados
     ],
     create: [],
     update: [],

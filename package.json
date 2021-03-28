@@ -57,15 +57,15 @@
         "feathers-swagger": "^1.2.1",
         "helmet": "^4.4.1",
         "pg": "^8.5.1",
-        "sequelize": "^6.5.0",
+        "sequelize": "^6.6.2",
         "serve-favicon": "^2.5.0",
         "tesseract.js": "^2.1.4",
         "winston": "^3.3.3"
     },
     "devDependencies": {
         "axios": "^0.21.1",
-        "eslint": "^7.21.0",
-        "mocha": "^8.3.1",
+        "eslint": "^7.23.0",
+        "mocha": "^8.3.2",
         "nodemon": "^2.0.7"
     }
 }

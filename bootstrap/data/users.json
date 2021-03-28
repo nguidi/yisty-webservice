@@ -5,7 +5,8 @@
         "password": "$2a$10$cd5VtSr5bL/aTGUUcFsTN.YXSfeFjCdXhs4xqTixzQ4tZk/RJfSWW",
         "full_name": "Some One",
         "active": true,
-        "profile_id": 2
+        "profile_id": 2,
+        "food_preference_id": 1
     },
     {
         "id": 2,
@@ -13,7 +14,8 @@
         "password": "$2a$10$Lssy7OVUcCmLgHhMtQPyHera659H/iGQIox.fupApvFtXbu.ixwXO",
         "full_name": "Another One",
         "active": true,
-        "profile_id": 2
+        "profile_id": 2,
+        "food_preference_id": 2
     },
     {
         "id": 3,

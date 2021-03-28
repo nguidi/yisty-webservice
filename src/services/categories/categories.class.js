@@ -3,12 +3,12 @@ const docs = require('./categories.documentation');
 
 exports.Categories = class Categories extends Service {
   
-    constructor(options, app) {
+  constructor(options, app) {
         
-        super(options, app);
+    super(options, app);
 
-        this.docs = docs;
+    this.docs = docs;
     
-    }
+  }
 
 };

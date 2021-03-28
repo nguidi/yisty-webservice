@@ -1,39 +1,39 @@
 function omitParams(data, params) {
 
-    params.forEach(param => {
+  params.forEach(param => {
 
-        delete data[param];
+    delete data[param];
 
-    });
+  });
 
-    return data;
+  return data;
 
 }
 
 module.exports = function (paramsToRemove) {
     
-    return function (context) {
+  return function (context) {
 
-        if (context.method == 'get') {
+    if (context.method == 'get') {
             
-            context.result = omitParams(context.result, paramsToRemove);
+      context.result = omitParams(context.result, paramsToRemove);
 
-        } else {
+    } else {
 
-            let data = Array.isArray(context.result) ? context.result : context.result.data;    // Por si no se esta paginando
+      let data = Array.isArray(context.result) ? context.result : context.result.data;    // Por si no se esta paginando
             
-            context.result.data = data.map(result => {
+      context.result.data = data.map(result => {
 
-                result = omitParams(result, paramsToRemove);
+        result = omitParams(result, paramsToRemove);
 
-                return result;
+        return result;
 
-            });
+      });
 
-        }
+    }
 
-        return context
+    return context;
       
-    };
+  };
 
 };

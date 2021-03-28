@@ -3,12 +3,12 @@ const docs = require('./profiles.documentation');
 
 exports.Profiles = class Profiles extends Service {
   
-    constructor(options, app) {
+  constructor(options, app) {
         
-        super(options, app);
+    super(options, app);
 
-        this.docs = docs;
+    this.docs = docs;
     
-    }
+  }
 
 };

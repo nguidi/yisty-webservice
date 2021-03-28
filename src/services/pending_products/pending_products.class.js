@@ -3,12 +3,12 @@ const docs = require('./pending_products.documentation');
 
 exports.PendingProducts = class PendingProducts extends Service {
   
-    constructor(options, app) {
+  constructor(options, app) {
         
-        super(options, app);
+    super(options, app);
 
-        this.docs = docs;
+    this.docs = docs;
     
-    }
+  }
 
 };

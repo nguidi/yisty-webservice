@@ -3,12 +3,12 @@ const docs = require('./products_food_preferences.documentation');
 
 exports.ProductsFoodPreferences = class ProductsFoodPreferences extends Service {
   
-    constructor(options, app) {
+  constructor(options, app) {
         
-        super(options, app);
+    super(options, app);
 
-        this.docs = docs;
+    this.docs = docs;
     
-    }
+  }
 
 };

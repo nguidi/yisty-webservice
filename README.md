@@ -32,6 +32,17 @@ Getting up and running is as easy as 1, 2, 3.
     ```
     npm start
     ```
+6. Stop the app
+7. Run db init
+
+    ```
+    npm run init
+    ```
+8. Start your app
+
+    ```
+    npm start
+    ```
 
 
 ## Docker setup

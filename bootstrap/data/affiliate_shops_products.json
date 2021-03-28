@@ -1,6 +1,8 @@
 [
     {
         "affiliate_shop_id": 1,
-        "product_id": 1
+        "product_id": 1,
+        "url": "http://localhost:3000",
+        "description":"Tenemos de todo papi!"
     }
 ]
