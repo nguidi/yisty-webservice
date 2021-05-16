@@ -1,5 +1,7 @@
+const errors = require('@feathersjs/errors');
 const { authenticate } = require('@feathersjs/authentication').hooks;
 const { hashPassword, protect } = require('@feathersjs/authentication-local').hooks;
+const bcrypt = require('bcryptjs');
 const { populate } = require('feathers-hooks-common');
 const omit = require('../../hooks/omit.js');
 
@@ -29,27 +31,28 @@ async function setDefaultUserParams(hook) {
   if (!hook.data.profileId) hook.data.profileId = 2;
 }
 
-async function sendActivationEmail(hook) {
-  // Envio el email usando sendGrid
-  let SendGrid = hook.app.get('SendGrid');
+async function shouldIContinue(hook) {
+  let user = await hook.app.service('users').get(hook.id);
 
-  console.log({
-    to: hook.result.email,
-    from: 'neri.guidi@gmail.com', // Use the email address or domain you verified above
-    subject: 'Activa tu cuenta salamin',
-    html: `<strong>Apreta el siguiente link si queres vivir: ${hook.app.get('activation_endpoint')} </strong>`,
-  });
+  if (hook.data.newPassword) {
+    let match = await bcrypt.compare(hook.data.password, user.password);
 
-  let result = await SendGrid.send({
-    to: hook.result.email,
-    from: 'neri.guidi@gmail.com', // Use the email address or domain you verified above
-    subject: 'Activa tu cuenta salamin',
-    html: `<strong>Apreta el siguiente link si queres vivir: ${hook.app.get('activation_endpoint')} </strong>`,
-  });
+    if (match) {
+      hook.data.password = hook.data.newPassword;
+    } else {
+      return Promise.reject(new errors.BadRequest({
+          errors: {
+            password: 'Wrong password'
+          }
+        })
+      );
+    }
 
-  console.log(result);
+  }
+
+  return hook;  
+
 }
-
 
 module.exports = {
   before: {
@@ -57,8 +60,8 @@ module.exports = {
     find: [ authenticate('jwt') ],
     get: [ authenticate('jwt') ],
     create: [ hashPassword('password'), setDefaultUserParams ],
-    update: [ hashPassword('password'),  authenticate('jwt') ],
-    patch: [ hashPassword('password'),  authenticate('jwt') ],
+    update: [ authenticate('jwt'), shouldIContinue, hashPassword('password') ],
+    patch: [ authenticate('jwt'), shouldIContinue, hashPassword('password') ],
     remove: [ authenticate('jwt') ]
   },
 
