@@ -30,5 +30,7 @@ services:
   adminer:
     image: adminer
     restart: always
+    links:
+      - db
     ports:
       - 8081:8080

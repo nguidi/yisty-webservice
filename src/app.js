@@ -21,13 +21,11 @@ const sequelizeToJsonSchemas = require('./documentation/sequelize-to-json-schema
 const swagger = require('./documentation/swagger.js');
 //const swagger = require('feathers-swagger');
 
-const tesseractWorker = ocr.createWorker({
-  logger: (m) => console.log(m),
-});
+const tesseractWorker = ocr.createWorker({});
 const initializeWorker = async() => {
-  await tesseractWorker.load();
-  await tesseractWorker.loadLanguage('spa');
-  await tesseractWorker.initialize('spa');
+    await tesseractWorker.load();
+    await tesseractWorker.loadLanguage('spa');
+    await tesseractWorker.initialize('spa');
 };
 const middleware = require('./middleware');
 const services = require('./services');
@@ -44,9 +42,9 @@ const app = express(feathers());
 app.configure(configuration());
 // Enable security, CORS, compression, favicon and body parsing
 app.use(
-  helmet({
-    contentSecurityPolicy: false,
-  })
+    helmet({
+        contentSecurityPolicy: false,
+    })
 );
 app.use(cors());
 app.use(compress());

@@ -1,72 +1,34 @@
 const assert = require("assert").strict;
-
-// splits a multiline string into a list of strings,
-// using `,` and `;` as separator.
-function splitIngredients(ingredients) {
-    let separators = ["\\,", "\\;"];
-    let regexp = new RegExp(separators.join("|"), "g");
-    let ingredientList = String(ingredients).split(regexp);
-    return ingredientList
-        .map((i) => i.toLowerCase())
-        .map((i) => removeDescription(i))
-        .map((i) => mergeMultiLineIngredient(i))
-        .map((i) => removeExtraInformation(i));
-}
-
-// takes something like "EMU: Lecitina de soja" and returns "Lecitina de soja"
-function removeDescription(ingredient) {
-    let ingredient_without_desc = ingredient.split(":")[1] || ingredient;
-    return ingredient_without_desc.trim();
-}
-
-// takes something like "goma\n xantica" and returns "goma xantica"
-function mergeMultiLineIngredient(ingredient) {
-    let singleLineIngredient = ingredient
-        .split("\n")
-        .join(" ")
-        .replace(/\s+/g, " ")
-        .trim();
-    return singleLineIngredient;
-}
-
-function removeExtraInformation(ingredient) {
-    // remove dots
-    let withoutDots = ingredient.split(".")[0] || ingredient;
-    // remove extra information
-    let withoutParens = withoutDots.split("(")[0] || withoutDots;
-    // remove mass numbers
-    let withoutMass = withoutParens.split(/[0-9]/)[0];
-    return withoutMass.trimEnd();
-}
+const scan = require("../src/middleware/scan");
 
 describe("Scanning functions", () => {
     it("mergeMultiLineIngredient removes \n", async() => {
         assert.equal(
-            mergeMultiLineIngredient("goma\n     xantica"),
+            scan.mergeMultiLineIngredient("goma\n     xantica"),
             "goma xantica"
         );
     });
 
     it("removeDescription removes EMU section", async() => {
         assert.equal(
-            removeDescription("EMU: lecitina de soja"),
+            scan.removeDescription("EMU: lecitina de soja"),
             "lecitina de soja"
         );
     });
 
     it("removeExtraInformation removes trailing information", async() => {
         let str = "rojo carmin. contiene gluten de";
-        assert.equal(removeExtraInformation(str), "rojo carmin");
+        assert.equal(scan.removeExtraInformation(str), "rojo carmin");
     });
 
     it("removeExtraInformation removes parens", async() => {
         let str = "Riboflavina (82) 13 mg/kg";
-        assert.equal(removeExtraInformation(str), "Riboflavina");
+        assert.equal(scan.removeExtraInformation(str), "Riboflavina");
     });
 
     it("removeExtraInformation removes amount of ingredient", async() => {
         let str = "acido folico 22 mg/kg";
-        assert.equal(removeExtraInformation(str), "acido folico");
+        assert.equal(scan.removeExtraInformation(str), "acido folico");
     });
 
     it("splitIngredients works ok", async() => {
@@ -98,6 +60,6 @@ describe("Scanning functions", () => {
             "aromatizante artificial sabor frambuesa",
             "rojo carmín",
         ];
-        assert.deepEqual(expected, splitIngredients(ingredients));
+        assert.deepEqual(expected, scan.splitIngredients(ingredients));
     });
 });
