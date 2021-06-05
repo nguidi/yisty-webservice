@@ -36,8 +36,6 @@ async function doScan(worker, image) {
 }
 
 async function queryIngredients(db, user_food_preference_id, ingredients) {
-    // see how to use the food_preference_id
-    user_food_preference_id = "1"; // vegetariano
     let params = ingredients.map((p) => "%" + p + "%");
     let where_sql = "ingredients.name LIKE ? OR ".repeat(ingredients.length - 1);
     // food_preferences.id as preference_id, food_preferences.name as preference_name,
@@ -104,13 +102,13 @@ let handler = (app) => {
     return async(req, res) => {
         let scannedText = "";
         const worker = app.get("TesseractWorker");
-
         try {
             scannedText = await streamToString(req).then((image) => {
                 return doScan(worker, image);
             });
             console.log("scannedText: ", scannedText);
-            let result = await queryIngredients(db, undefined, scannedText);
+            let user_food_preference = req.user.food_preference.id
+            let result = await queryIngredients(db, user_food_preference, scannedText);
             console.log(result);
             res
                 .writeHead(200, { "Content-Type": "application/json" })
