@@ -27,18 +27,18 @@ const files = [
     { name: 'user_affiliate_shops', pks: ['user_id', 'affiliate_shop_id'] },
     { name: 'products_food_preferences', pks: ['id'] }
 ]
-    
-const rawData = files.map( f => {
+
+const rawData = files.map(f => {
 
     console.log(`Interpretando el archivo ${f.name}`);
-    
+
     let file = fs.readFileSync(path.join(rootFolder, `${f.name}.json`));
 
-    return Object.assign( f, { data: JSON.parse(file) } );
+    return Object.assign(f, { data: JSON.parse(file) });
 })
 
-const tables = rawData.map( d => { 
-    return Object.assign(d, { queries: d.data.map(rd => { return { id: rd.id, select: getSelectQuery(d.name, rd, d.pks), insert: getInsertQuery(d.name, rd), update: getUpdateQuery(d.name, rd, d.pks) } }) }) 
+const tables = rawData.map(d => {
+    return Object.assign(d, { queries: d.data.map(rd => { return { id: rd.id, select: getSelectQuery(d.name, rd, d.pks), insert: getInsertQuery(d.name, rd), update: getUpdateQuery(d.name, rd, d.pks) } }) })
 });
 
 return initialize();
@@ -52,8 +52,8 @@ async function initialize() {
     let database = credentials.pathname.split('/').pop();
 
     console.log(`Inicializando \'${database}\'`);
-    
-    // Inicializo la conexion con la base de datos    
+
+    // Inicializo la conexion con la base de datos
     let client = new Client({
         user: credentials.username,
         host: credentials.hostname,
@@ -64,12 +64,12 @@ async function initialize() {
 
     client.connect();
 
-    for (let table of tables ) {
+    for (let table of tables) {
 
         // Inidico que estoy por insertar/actualizar
         console.log(`Inicializando la tabla: ${table.name}`);
- 
-        for (let data of table.queries ) {
+
+        for (let data of table.queries) {
 
             console.log(`Validando si existe el recurso con id: ${data.id}`)
             console.log(`Usando la consulta SQL: ${data.select}`)
@@ -78,7 +78,7 @@ async function initialize() {
             let res = await client.query(data.select).catch(r => { errors.push(r); return false });
 
             // Si tengo 0 rows, no logre encontrar el ID, por ende, inserto el nuevo dato, de lo contrario actualizo
-            if (res && !res.rowCount) { 
+            if (res && !res.rowCount) {
 
                 console.log(`El elemento no existe. Insertando el registro.`)
                 console.log(`Usando la consulta SQL: ${data.insert}`)
@@ -105,13 +105,13 @@ async function initialize() {
                 }
 
             }
-            
+
         }
 
     }
 
     console.log(`Proceso Finalizado. Errores ${errors.length}.`);
-    
+
     errors.forEach(console.log);
 
     client.end();
@@ -123,7 +123,7 @@ function getSelectQuery(dbName, data, pks) {
 
     let where_pairs = []
 
-    pks.forEach( key => {
+    pks.forEach(key => {
         where_pairs.push(`${key} = ${data[key]}`);
     })
 
@@ -138,10 +138,10 @@ function getInsertQuery(dbName, data) {
 
     let model = '(' + Object.keys(data).join(', ') + ', created_at, updated_at)';
 
-    let values = '(' + Object.values(data).map(v => { return (typeof v == "string") ? "\'"+v+"\'" : v }).join(', ')  + ', NOW(), NOW())';
+    let values = '(' + Object.values(data).map(v => { return (typeof v == "string") ? "\'" + v + "\'" : v }).join(', ') + ', NOW(), NOW())';
 
     return `INSERT INTO ${dbName} ${model} VALUES ${values};`
-    
+
 }
 
 
@@ -151,7 +151,7 @@ function getUpdateQuery(dbName, data, pks) {
 
     for (var key in data) {
         if (key != 'id') {
-            let value = (typeof data[key] == "string") ? "\'"+data[key]+"\'" : data[key];
+            let value = (typeof data[key] == "string") ? "\'" + data[key] + "\'" : data[key];
             pairs.push(`${key} = ${value}`)
         }
     }
@@ -162,12 +162,12 @@ function getUpdateQuery(dbName, data, pks) {
 
     let where_pairs = []
 
-    pks.forEach( key => {
+    pks.forEach(key => {
         where_pairs.push(`${key} = ${data[key]}`);
     })
 
     let where = where_pairs.join(' AND ');
 
     return `UPDATE ${dbName} SET ${values} WHERE ${where};`
-    
+
 }
