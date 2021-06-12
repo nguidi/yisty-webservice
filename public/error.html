@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Error</title>
+        <style>
+            @import url(https://fonts.googleapis.com/css?family=Raleway:300);
+            *,
+            *:before,
+            *:after {
+            box-sizing: border-box;
+            }
+
+            html {
+            height: 100%;
+            }
+
+            body {
+            background: url(http://i.giphy.com/gKsJUddjnpPG0.gif) no-repeat center center fixed;
+            background-size: cover;
+            font-family: "Raleway", sans-serif;
+            background-color: #342643;
+            height: 100%;
+            }
+
+            .text-wrapper {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            }
+
+            .title {
+            font-size: 9em;
+            font-weight: 700;
+            color: white;
+            position: relative;
+            }
+
+            .subtitle {
+            font-size: 40px;
+            font-weight: 700;
+            color: white;
+            position: relative;
+            }
+
+            .source {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            font-size: 10px;
+            color: #fff;
+            }
+
+            .buttons {
+            margin: 30px;
+            }
+            .buttons a.button {
+            position: absolute;
+            background-color: transparent;
+            font-weight: 700;
+            border: 2px solid white;
+            text-decoration: none;
+            padding: 15px;
+            left: 50%;
+            margin-left: -85px;
+            text-transform: uppercase;
+            color: white;
+            border-radius: 26px;
+            transition: all 0.1s ease-in-out;
+            }
+            .buttons a.button:hover {
+            color: white;
+            transition: all 0.1s ease-in-out;
+            transform: translateY(-5px);
+            }
+
+            @-webkit-keyframes noise-anim {
+            0% {
+                clip: rect(142px, 9999px, 81px, 0);
+            }
+            5% {
+                clip: rect(4px, 9999px, 40px, 0);
+            }
+            10% {
+                clip: rect(176px, 9999px, 130px, 0);
+            }
+            15% {
+                clip: rect(197px, 9999px, 179px, 0);
+            }
+            20% {
+                clip: rect(86px, 9999px, 165px, 0);
+            }
+            25% {
+                clip: rect(49px, 9999px, 4px, 0);
+            }
+            30% {
+                clip: rect(183px, 9999px, 81px, 0);
+            }
+            35% {
+                clip: rect(195px, 9999px, 29px, 0);
+            }
+            40% {
+                clip: rect(70px, 9999px, 198px, 0);
+            }
+            45% {
+                clip: rect(51px, 9999px, 5px, 0);
+            }
+            50% {
+                clip: rect(73px, 9999px, 134px, 0);
+            }
+            55% {
+                clip: rect(36px, 9999px, 120px, 0);
+            }
+            60% {
+                clip: rect(4px, 9999px, 182px, 0);
+            }
+            65% {
+                clip: rect(76px, 9999px, 70px, 0);
+            }
+            70% {
+                clip: rect(52px, 9999px, 200px, 0);
+            }
+            75% {
+                clip: rect(23px, 9999px, 62px, 0);
+            }
+            80% {
+                clip: rect(79px, 9999px, 43px, 0);
+            }
+            85% {
+                clip: rect(29px, 9999px, 86px, 0);
+            }
+            90% {
+                clip: rect(50px, 9999px, 139px, 0);
+            }
+            95% {
+                clip: rect(143px, 9999px, 40px, 0);
+            }
+            100% {
+                clip: rect(92px, 9999px, 152px, 0);
+            }
+            }
+
+            @keyframes noise-anim {
+            0% {
+                clip: rect(142px, 9999px, 81px, 0);
+            }
+            5% {
+                clip: rect(4px, 9999px, 40px, 0);
+            }
+            10% {
+                clip: rect(176px, 9999px, 130px, 0);
+            }
+            15% {
+                clip: rect(197px, 9999px, 179px, 0);
+            }
+            20% {
+                clip: rect(86px, 9999px, 165px, 0);
+            }
+            25% {
+                clip: rect(49px, 9999px, 4px, 0);
+            }
+            30% {
+                clip: rect(183px, 9999px, 81px, 0);
+            }
+            35% {
+                clip: rect(195px, 9999px, 29px, 0);
+            }
+            40% {
+                clip: rect(70px, 9999px, 198px, 0);
+            }
+            45% {
+                clip: rect(51px, 9999px, 5px, 0);
+            }
+            50% {
+                clip: rect(73px, 9999px, 134px, 0);
+            }
+            55% {
+                clip: rect(36px, 9999px, 120px, 0);
+            }
+            60% {
+                clip: rect(4px, 9999px, 182px, 0);
+            }
+            65% {
+                clip: rect(76px, 9999px, 70px, 0);
+            }
+            70% {
+                clip: rect(52px, 9999px, 200px, 0);
+            }
+            75% {
+                clip: rect(23px, 9999px, 62px, 0);
+            }
+            80% {
+                clip: rect(79px, 9999px, 43px, 0);
+            }
+            85% {
+                clip: rect(29px, 9999px, 86px, 0);
+            }
+            90% {
+                clip: rect(50px, 9999px, 139px, 0);
+            }
+            95% {
+                clip: rect(143px, 9999px, 40px, 0);
+            }
+            100% {
+                clip: rect(92px, 9999px, 152px, 0);
+            }
+            }
+            .subtitle:after,
+            .title:after {
+            content: attr(data-content);
+            position: absolute;
+            left: 2px;
+            text-shadow: -1px 0 red;
+            top: 0;
+            color: white;
+            overflow: hidden;
+            clip: rect(0, 900px, 0, 0);
+            animation: noise-anim 2s infinite linear alternate-reverse;
+            }
+
+            @-webkit-keyframes noise-anim-2 {
+            0% {
+                clip: rect(101px, 9999px, 56px, 0);
+            }
+            5% {
+                clip: rect(73px, 9999px, 88px, 0);
+            }
+            10% {
+                clip: rect(83px, 9999px, 107px, 0);
+            }
+            15% {
+                clip: rect(8px, 9999px, 41px, 0);
+            }
+            20% {
+                clip: rect(49px, 9999px, 199px, 0);
+            }
+            25% {
+                clip: rect(98px, 9999px, 92px, 0);
+            }
+            30% {
+                clip: rect(27px, 9999px, 47px, 0);
+            }
+            35% {
+                clip: rect(97px, 9999px, 30px, 0);
+            }
+            40% {
+                clip: rect(138px, 9999px, 100px, 0);
+            }
+            45% {
+                clip: rect(197px, 9999px, 10px, 0);
+            }
+            50% {
+                clip: rect(182px, 9999px, 71px, 0);
+            }
+            55% {
+                clip: rect(62px, 9999px, 88px, 0);
+            }
+            60% {
+                clip: rect(197px, 9999px, 147px, 0);
+            }
+            65% {
+                clip: rect(163px, 9999px, 40px, 0);
+            }
+            70% {
+                clip: rect(32px, 9999px, 194px, 0);
+            }
+            75% {
+                clip: rect(91px, 9999px, 86px, 0);
+            }
+            80% {
+                clip: rect(194px, 9999px, 91px, 0);
+            }
+            85% {
+                clip: rect(161px, 9999px, 178px, 0);
+            }
+            90% {
+                clip: rect(53px, 9999px, 135px, 0);
+            }
+            95% {
+                clip: rect(168px, 9999px, 54px, 0);
+            }
+            100% {
+                clip: rect(139px, 9999px, 35px, 0);
+            }
+            }
+
+            @keyframes noise-anim-2 {
+            0% {
+                clip: rect(101px, 9999px, 56px, 0);
+            }
+            5% {
+                clip: rect(73px, 9999px, 88px, 0);
+            }
+            10% {
+                clip: rect(83px, 9999px, 107px, 0);
+            }
+            15% {
+                clip: rect(8px, 9999px, 41px, 0);
+            }
+            20% {
+                clip: rect(49px, 9999px, 199px, 0);
+            }
+            25% {
+                clip: rect(98px, 9999px, 92px, 0);
+            }
+            30% {
+                clip: rect(27px, 9999px, 47px, 0);
+            }
+            35% {
+                clip: rect(97px, 9999px, 30px, 0);
+            }
+            40% {
+                clip: rect(138px, 9999px, 100px, 0);
+            }
+            45% {
+                clip: rect(197px, 9999px, 10px, 0);
+            }
+            50% {
+                clip: rect(182px, 9999px, 71px, 0);
+            }
+            55% {
+                clip: rect(62px, 9999px, 88px, 0);
+            }
+            60% {
+                clip: rect(197px, 9999px, 147px, 0);
+            }
+            65% {
+                clip: rect(163px, 9999px, 40px, 0);
+            }
+            70% {
+                clip: rect(32px, 9999px, 194px, 0);
+            }
+            75% {
+                clip: rect(91px, 9999px, 86px, 0);
+            }
+            80% {
+                clip: rect(194px, 9999px, 91px, 0);
+            }
+            85% {
+                clip: rect(161px, 9999px, 178px, 0);
+            }
+            90% {
+                clip: rect(53px, 9999px, 135px, 0);
+            }
+            95% {
+                clip: rect(168px, 9999px, 54px, 0);
+            }
+            100% {
+                clip: rect(139px, 9999px, 35px, 0);
+            }
+            }
+            .subtitle:before,
+            .title:before {
+            content: attr(data-content);
+            position: absolute;
+            left: -2px;
+            text-shadow: 1px 0 blue;
+            top: 0;
+            color: white;
+            overflow: hidden;
+            clip: rect(0, 900px, 0, 0);
+            animation: noise-anim-2 3s infinite linear alternate-reverse;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="text-wrapper">
+            <div class="title" data-content="500">
+              500
+            </div>
+          
+            <div class="subtitle" data-content="Algo salio mal">
+              Algo salio mal
+            </div>
+          
+          </div>
+    </body>
+</html>

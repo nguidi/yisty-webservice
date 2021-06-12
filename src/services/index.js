@@ -12,6 +12,7 @@ const pendingProducts = require('./pending_products/pending_products.service.js'
 const pendingIngredients = require('./pending_ingredients/pending_ingredients.service.js');
 const productsFoodPreferences = require('./products_food_preferences/products_food_preferences.service.js');
 const affiliateShopsProducts = require('./affiliate_shops_products/affiliate_shops_products.service.js');
+const activationEndpoint = require('./activation_endpoint/activation_endpoint.service.js');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(profiles);
@@ -28,4 +29,5 @@ module.exports = function (app) {
   app.configure(pendingIngredients);
   app.configure(productsFoodPreferences);
   app.configure(affiliateShopsProducts);
+  app.configure(activationEndpoint);
 };

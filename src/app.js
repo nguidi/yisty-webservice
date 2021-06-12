@@ -4,12 +4,8 @@ const compress = require('compression');
 const helmet = require('helmet');
 const cors = require('cors');
 const logger = require('./logger');
-const SendGrid = require('@sendgrid/mail');
+const mailer = require('./mailer');
 const ocr = require('tesseract.js');
-//const SendGrid = require('@sendgrid/mail');
-//SendGrid.setApiKey(process.env.SENDGRID_API_KEY);
-
-SendGrid.setApiKey(process.env.SENDGRID_API_KEY);
 
 const feathers = require('@feathersjs/feathers');
 const configuration = require('@feathersjs/configuration');
@@ -79,11 +75,9 @@ app.use(express.errorHandler({ logger }));
 
 app.hooks(appHooks);
 
-//app.set('SendGrid',SendGrid)
-//app.set('activation_endpoint',app.host+'/activate')
 initializeWorker().finally(() => app.set('TesseractWorker', tesseractWorker));
 
-app.set('SendGrid', SendGrid);
-app.set('activation_endpoint', app.host + '/activate');
+app.set('Mailer', mailer);
+app.set('activate_user_url', 'http://localhost:3030/activate_user')
 
 module.exports = app;
