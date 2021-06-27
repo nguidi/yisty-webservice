@@ -79,5 +79,6 @@ initializeWorker().finally(() => app.set('TesseractWorker', tesseractWorker));
 
 app.set('Mailer', mailer);
 app.set('activate_user_url', 'http://localhost:3030/activate_user')
+app.set('recover_password_url', 'http://localhost:3030/account_recovery.html')
 
 module.exports = app;

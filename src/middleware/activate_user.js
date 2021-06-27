@@ -12,6 +12,8 @@ module.exports = (app) => {
 
             let user = await req.app.service('users').patch(activation.userId, { active: true });
 
+            await req.app.service('activation_endpoint').remove(activation.id);
+
             if (user.active) {
                 res.redirect('/activated.html')
             } else {
