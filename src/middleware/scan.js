@@ -2,7 +2,7 @@
 // [
 //   { 'id': 1,
 //     'name': 'Azucar',
-//     'result': true // puede comerlo 
+//     'result': true // puede comerlo
 //   },
 //   { 'id': 2,
 //     'name': 'Grasas animales',
@@ -29,7 +29,7 @@ async function doScan(worker, image) {
         const {
             data: { text },
         } = await worker.recognize(image);
-        return splitIngredients(text);
+        return parseIngredients(text);
     } catch (e) {
         console.log(e);
     }
@@ -63,11 +63,16 @@ function splitIngredients(ingredients) {
     let separators = ["\\,", "\\;"];
     let regexp = new RegExp(separators.join("|"), "g");
     let ingredientList = String(ingredients).split(regexp);
-    return ingredientList
+    return ingredientList;
+}
+
+function parseIngredients(string) {
+    return splitIngredients(string)
         .map((i) => i.toLowerCase())
         .map((i) => removeDescription(i))
         .map((i) => mergeMultiLineIngredient(i))
-        .map((i) => removeExtraInformation(i));
+        .map((i) => removeExtraInformation(i))
+        .filter((i) => i != ''); // remove empty strings
 }
 
 // takes something like "EMU: Lecitina de soja" and returns "Lecitina de soja"
@@ -126,4 +131,5 @@ module.exports = {
     removeDescription: removeDescription,
     mergeMultiLineIngredient: mergeMultiLineIngredient,
     splitIngredients: splitIngredients,
+    parseIngredients: parseIngredients
 };
