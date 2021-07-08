@@ -1,42 +1,69 @@
-[
-    {
+[{
         "id": 1,
-        "name": "ING A"
+        "name": "harina de trigo enriquecida"
     },
     {
         "id": 2,
-        "name": "ING B"
+        "name": "jarabe de maiz de alta fructosa"
     },
     {
         "id": 3,
-        "name": "ING C"
+        "name": "azucar"
     },
     {
         "id": 4,
-        "name": "ING D"
+        "name": "oleomargarina"
     },
     {
         "id": 5,
-        "name": "ING E"
+        "name": "sal"
     },
     {
         "id": 6,
-        "name": "ING F"
+        "name": "goma xantica"
     },
     {
         "id": 7,
-        "name": "ING G"
+        "name": "bicarbonato de sodio"
     },
     {
         "id": 8,
-        "name": "ING H"
+        "name": "bicarbonato de amonio"
     },
     {
         "id": 9,
-        "name": "ING I"
+        "name": "lecitina de soja"
     },
     {
         "id": 10,
-        "name": "ING J"
+        "name": "rojo carmin"
+    },
+    {
+        "id": 11,
+        "name": "gluten"
+    },
+    {
+        "id": 12,
+        "name": "leche"
+    },
+    {
+        "id": 13,
+        "name": "grasa bovina"
+    },
+    {
+        "id": 14,
+        "name": "grasa vacuna"
+    },
+    {
+        "id": 15,
+        "name": "huevo"
+    },
+    {
+        "id": 16,
+        "name": "manteca"
+    },
+    {
+        "id": 17,
+        "name": "jamon"
     }
 ]

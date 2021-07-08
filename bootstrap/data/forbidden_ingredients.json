@@ -1,5 +1,4 @@
-[
-    {
+[{
         "food_preference_id": 1,
         "ingredient_id": 1
     },
@@ -24,7 +23,7 @@
         "ingredient_id": 6
     },
     {
-       "food_preference_id": 2,
+        "food_preference_id": 2,
         "ingredient_id": 7
     },
     {
@@ -57,6 +56,54 @@
     },
     {
         "food_preference_id": 2,
-        "ingredient_id": 5
+        "ingredient_id": 10
+    },
+    {
+        "food_preference_id": 2,
+        "ingredient_id": 12
+    },
+    {
+        "food_preference_id": 2,
+        "ingredient_id": 13
+    },
+    {
+        "food_preference_id": 2,
+        "ingredient_id": 14
+    },
+    {
+        "food_preference_id": 1,
+        "ingredient_id": 12
+    },
+    {
+        "food_preference_id": 1,
+        "ingredient_id": 13
+    },
+    {
+        "food_preference_id": 1,
+        "ingredient_id": 14
+    },
+    {
+        "food_preference_id": 1,
+        "ingredient_id": 15
+    },
+    {
+        "food_preference_id": 2,
+        "ingredient_id": 15
+    },
+    {
+        "food_preference_id": 1,
+        "ingredient_id": 16
+    },
+    {
+        "food_preference_id": 2,
+        "ingredient_id": 16
+    },
+    {
+        "food_preference_id": 1,
+        "ingredient_id": 17
+    },
+    {
+        "food_preference_id": 2,
+        "ingredient_id": 17
     }
 ]
