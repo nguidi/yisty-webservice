@@ -44,7 +44,7 @@ module.exports = {
             to:  hook.result.email,
             from: 'yistyapp@gmail.com', // Use the email address or domain you verified above
             subject: 'Recupera tu cuenta de Yisty',
-            html: `Se creo una solicitud de recuperación de cuenta en la aplicación <b>Yisty</b>. Haz click <a href="${hook.app.get('recover_password_url')+'#'+hook.result.key}">aqui</a> para recuperar tu cuenta. Si no solicistaste recuperar tu cuenta en <b>Yisty</b> ignora este email.`,
+            html: `Se creo una solicitud de recuperación de cuenta en la aplicación <b>Yisty</b>. Haz click <a href="${hook.app.get('recover_password_url')+'#'+hook.result.key}">aqui</a> para recuperar tu cuenta. Si no solicitaste recuperar tu cuenta en <b>Yisty</b> ignora este email.`,
         };
           
         if (!asyncSendEmail(Mailer, mailOptions)) {
