@@ -14,22 +14,34 @@
 //   }
 // ];
 const sequelize = require("sequelize");
+const ocrSpace = require('ocr-space-api-wrapper')
 
-async function streamToString(stream) {
+async function streamToBase64(stream) {
     const chunks = [];
     return new Promise((resolve, reject) => {
         stream.on("data", (chunk) => chunks.push(chunk));
         stream.on("error", reject);
-        stream.on("end", () => resolve(Buffer.concat(chunks)));
+        stream.on("end", () => resolve(Buffer.concat(chunks).toString('base64')));
     });
 }
 
-async function doScan(worker, image) {
+async function doScan(image) {
     try {
-        const {
-            data: { text },
-        } = await worker.recognize(image);
-        return parseIngredients(text);
+        const response = await ocrSpace(
+            'data:image/png;'+image,
+            {
+                apiKey: process.env.OCR_API,
+                language: 'spa',
+                isOverlayRequired: false,
+                detectOrientation: false,
+                scale: false,
+                isTable: false,
+                OCREngine: 2
+            }
+        )
+        console.log(response)
+        console.log(response.ParsedResults[0].ParsedText)
+        return parseIngredients(response.ParsedResults[0].ParsedText);
     } catch (e) {
         console.log(e);
     }
@@ -106,10 +118,9 @@ let handler = (app) => {
     const db = app.get("sequelizeClient");
     return async(req, res) => {
         let scannedText = "";
-        const worker = app.get("TesseractWorker");
         try {
-            scannedText = await streamToString(req).then((image) => {
-                return doScan(worker, image);
+            scannedText = await streamToBase64(req).then((image) => {
+                return doScan(image);
             });
             console.log("scannedText: ", scannedText);
             let user_food_preference = req.user.food_preference.id
