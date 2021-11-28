@@ -6,6 +6,7 @@ const cors = require('cors');
 const logger = require('./logger');
 const mailer = require('./mailer');
 const ocr = require('tesseract.js');
+const fs = require('fs');
 
 const feathers = require('@feathersjs/feathers');
 const configuration = require('@feathersjs/configuration');
@@ -78,7 +79,9 @@ app.hooks(appHooks);
 initializeWorker().finally(() => app.set('TesseractWorker', tesseractWorker));
 
 app.set('Mailer', mailer);
-app.set('activate_user_url', 'http://localhost:3030/activate_user')
-app.set('recover_password_url', 'http://localhost:3030/account_recovery.html')
+app.set('activate_user_url', process.env.SITE_URL+'/activate_user')
+app.set('recover_password_url', process.env.SITE_URL+'/account_recovery.html')
+app.set('mail_template', fs.readFileSync(path.join(__dirname, '../private/activation_email/template.html'),'utf8'));
+app.set('mail_logo', path.join(__dirname, '../public/img/logo3.png'));
 
 module.exports = app;

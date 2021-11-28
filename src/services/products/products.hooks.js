@@ -20,6 +20,9 @@ const manufacturerRelation = {
   }
 };
 
+async function addIngredients(context) {
+  console.log(context.result)
+}
 
 async function populateProductFoodPreference(context) {
 
@@ -103,7 +106,13 @@ module.exports = {
       verifyPopulateVars
     ],
     create: [],
-    update: [],
+    update: [
+      function rawFalse(context) {
+        if (!context.params.sequelize) context.params.sequelize = {};
+        Object.assign(context.params.sequelize, { raw: false });
+        return context;
+      }
+    ],
     patch: [],
     remove: []
   },
@@ -123,7 +132,9 @@ module.exports = {
       omit(['categoryId', 'manufacturerId', 'foodPreferenceId', '_include']),
       iff(context => (context.params.$populateAffiliatedShops == true), populateAffilateShopRelation), // Si soy quiero traer los afiliados
     ],
-    create: [],
+    create: [
+      addIngredients
+    ],
     update: [],
     patch: [],
     remove: []

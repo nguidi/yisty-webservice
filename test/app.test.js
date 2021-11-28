@@ -11,7 +11,7 @@ const getUrl = pathname => url.format({
   pathname
 });
 
-describe('Feathers application tests', () => {
+describe('Disponibilidad del Webservice', () => {
   let server;
 
   before(function(done) {
@@ -23,21 +23,21 @@ describe('Feathers application tests', () => {
     server.close(done);
   });
 
-  it('starts and shows the index page', async () => {
+  it('Inicializa y muestra el sitio de inicio', async () => {
     const { data } = await axios.get(getUrl());
 
     assert.ok(data.indexOf('<html lang="en">') !== -1);
   });
 
-  describe('404', function() {
-    it('shows a 404 HTML page', async () => {
+  describe('404 - Not Found', function() {
+    it('Muestra un 404 - Not Found', async () => {
       try {
         await axios.get(getUrl('path/to/nowhere'), {
           headers: {
             'Accept': 'text/html'
           }
         });
-        assert.fail('should never get here');
+        assert.fail('No deberiamos llegar hasta aqui.');
       } catch (error) {
         const { response } = error;
 
@@ -46,12 +46,12 @@ describe('Feathers application tests', () => {
       }
     });
 
-    it('shows a 404 JSON error without stack trace', async () => {
+    it('Muestra un 404 - JSON error sin stack trace', async () => {
       try {
         await axios.get(getUrl('path/to/nowhere'), {
           json: true
         });
-        assert.fail('should never get here');
+        assert.fail('No deberiamos llegar hasta aqui.');
       } catch (error) {
         const { response } = error;
 

@@ -39,11 +39,10 @@ async function doScan(image) {
                 OCREngine: 2
             }
         )
-        console.log(response)
-        console.log(response.ParsedResults[0].ParsedText)
         return parseIngredients(response.ParsedResults[0].ParsedText);
     } catch (e) {
         console.log(e);
+        return e;
     }
 }
 
@@ -59,13 +58,13 @@ async function queryIngredients(db, user_food_preference_id, ingredients) {
         `ingredients.name LIKE ?)`;
     let opts = { replacements: params, type: sequelize.QueryTypes.SELECT, raw: true };
     let result = await db.query(q, opts).then((res) => res);
-    console.log(result)
+
     for (let i of ingredients) {
         if (!result.map(r => r.name).includes(i)) {
             result.push({ id: null, name: i, result: null })
         }
     }
-    console.log(result);
+
     return result;
 }
 
@@ -122,10 +121,10 @@ let handler = (app) => {
             scannedText = await streamToBase64(req).then((image) => {
                 return doScan(image);
             });
-            console.log("scannedText: ", scannedText);
+
             let user_food_preference = req.user.food_preference.id
             let result = await queryIngredients(db, user_food_preference, scannedText);
-            console.log(result);
+
             res
                 .writeHead(200, { "Content-Type": "application/json" })
                 .end(JSON.stringify(result));

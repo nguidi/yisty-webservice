@@ -1,37 +1,37 @@
 const assert = require("assert").strict;
 const scan = require("../src/middleware/scan");
 
-describe("Scanning functions", () => {
-    it("mergeMultiLineIngredient removes \n", async() => {
+describe("Funciones de escaneo de un producto", () => {
+    it("Función: mergeMultiLineIngredient", async() => {
         assert.equal(
             scan.mergeMultiLineIngredient("goma\n     xantica"),
             "goma xantica"
         );
     });
 
-    it("removeDescription removes EMU section", async() => {
+    it("Función: removeDescription", async() => {
         assert.equal(
             scan.removeDescription("EMU: lecitina de soja"),
             "lecitina de soja"
         );
     });
 
-    it("removeExtraInformation removes trailing information", async() => {
+    it("Función: removeExtraInformation", async() => {
         let str = "rojo carmin. contiene gluten de";
         assert.equal(scan.removeExtraInformation(str), "rojo carmin");
     });
 
-    it("removeExtraInformation removes parens", async() => {
+    it("Función: removeExtraInformation", async() => {
         let str = "Riboflavina (82) 13 mg/kg";
         assert.equal(scan.removeExtraInformation(str), "Riboflavina");
     });
 
-    it("removeExtraInformation removes amount of ingredient", async() => {
+    it("Función: removeExtraInformation", async() => {
         let str = "acido folico 22 mg/kg";
         assert.equal(scan.removeExtraInformation(str), "acido folico");
     });
 
-    it("splitIngredients works ok", async() => {
+    it("Función: splitIngredients", async() => {
         let ingredients = `GALLETITAS DULCES CON RELLENO SA
         FRAMBUESA - Ingredientes: Harina de trigo enríquá£lf
         por ley 25.630 (hierro 30 mg/kg, ácido fólico 22 mg/kg,

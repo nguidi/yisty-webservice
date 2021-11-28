@@ -53,11 +53,19 @@ async function sendActivationEmail(hook) {
 
   let Mailer = hook.app.get('Mailer');
 
+  let mailTemplate = hook.app.get('mail_template');
+
   var mailOptions = {
       to:  hook.result.email,
       from: 'yistyapp@gmail.com', // Use the email address or domain you verified above
-      subject: 'Valida tu cuenta de Yisty',
-      html: `Hola ${hook.data.full_name}, se creo una cuenta a tu nombre en la aplicación <b>Yisty</b>. Haz click <a href="${hook.app.get('activate_user_url')+'/'+activation.key}">aqui</a> para activar tu cuenta. Si no creaste una cuenta en <b>Yisty</b> ignora este email.`,
+      subject: 'Activa tu cuenta de Yisty',
+      attachments: [{
+        filename: 'logo.png',
+        path: hook.app.get('mail_logo'),
+        cid: 'logo'
+      }],
+      html: mailTemplate.replace('{{username}}', hook.data.full_name).replace('{{activation_url}}', hook.app.get('activate_user_url')+'/'+activation.key)
+      //html: `Hola ${hook.data.full_name}, se creo una cuenta a tu nombre en la aplicación <b>Yisty</b>. Haz click <a href="${hook.app.get('activate_user_url')+'/'+activation.key}">aqui</a> para activar tu cuenta. Si no creaste una cuenta en <b>Yisty</b> ignora este email.`,
   };
     
   if (!asyncSendEmail(Mailer, mailOptions)) {
