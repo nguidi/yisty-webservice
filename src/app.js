@@ -82,6 +82,6 @@ app.set('Mailer', mailer);
 app.set('activate_user_url', process.env.SITE_URL+'/activate_user')
 app.set('recover_password_url', process.env.SITE_URL+'/account_recovery.html')
 app.set('mail_template', fs.readFileSync(path.join(__dirname, '../private/activation_email/template.html'),'utf8'));
-app.set('mail_logo', path.join(__dirname, '../public/img/logo3.png'));
+app.set('mail_logo', path.join(__dirname, '../public/img/logo-min.png'));
 
 module.exports = app;
