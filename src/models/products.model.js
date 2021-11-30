@@ -13,7 +13,7 @@ module.exports = function (app) {
       unique: true
     },
     image: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(6000),
       allowNull: true
     },
     barcode: {
