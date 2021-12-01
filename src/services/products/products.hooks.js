@@ -120,7 +120,7 @@ module.exports = {
   after: {
     all: [],
     find: [
-      iff(context => (context.params.user.profile.id == 2), populateProductFoodPreference), // Si soy un mero user
+      iff(context => (context.params.user.profile.id == 1), populateProductFoodPreference), // Si soy un mero user
       populate({ schema: categoryRelation}),
       populate({ schema: manufacturerRelation}),
       omit(['categoryId', 'manufacturerId', 'foodPreferenceId', '_include']),
