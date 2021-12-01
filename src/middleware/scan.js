@@ -14,7 +14,8 @@
 //   }
 // ];
 const sequelize = require("sequelize");
-const ocrSpace = require('ocr-space-api-wrapper')
+const { ocrSpace } = require('ocr-space-api-wrapper');
+const { query } = require("express");
 
 async function streamToBase64(stream) {
     const chunks = [];
@@ -26,6 +27,7 @@ async function streamToBase64(stream) {
 }
 
 async function doScan(image) {
+
     try {
         const response = await ocrSpace(
             'data:image/png;'+image,
@@ -47,6 +49,22 @@ async function doScan(image) {
 }
 
 async function queryIngredients(db, user_food_preference_id, ingredients) {
+    // food_preferences.id as preference_id, food_preferences.name as preference_name,
+    let fields = `ingredients.id as id, ingredients.name as name, food_preference_id <> ${user_food_preference_id} OR food_preference_id is NULL as result`;
+    let joins = "forbidden_ingredients ON ingredients.id = ingredient_id LEFT OUTER JOIN food_preferences ON food_preference_id = food_preferences.id";
+    let queries = ingredients.map(ingredient => {return `SELECT ${fields} FROM ingredients LEFT OUTER JOIN ${joins} ORDER BY levenshtein(ingredients.name, '${ingredient}') ASC LIMIT 1`;})
+        
+    let opts = { type: sequelize.QueryTypes.SELECT, raw: true };
+    let result = (await Promise.all(queries.map(q => {return db.query(q, opts)}))).flat()
+
+    for (let i of ingredients) {
+        if (!result.map(r => r.name).includes(i)) {
+            result.push({ id: null, name: i, result: null })
+        }
+    }
+
+    return result;
+    /*
     let params = ingredients.map((p) => "%" + p + "%");
     let where_sql = "ingredients.name LIKE ? OR ".repeat(ingredients.length - 1);
     // food_preferences.id as preference_id, food_preferences.name as preference_name,
@@ -66,6 +84,7 @@ async function queryIngredients(db, user_food_preference_id, ingredients) {
     }
 
     return result;
+    */
 }
 
 // splits a multiline string into a list of strings,
