@@ -32,7 +32,8 @@ async function doScan(image) {
         const response = await ocrSpace(
             'data:image/png;'+image,
             {
-                apiKey: process.env.OCR_API,
+                apiKey: process.env.OCR_API_KEY,
+                ocrUrl: process.env.OCR_API_URL,
                 language: 'spa',
                 isOverlayRequired: false,
                 detectOrientation: false,
