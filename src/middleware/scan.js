@@ -29,7 +29,7 @@ async function streamToBase64(stream) {
 async function doScan(image) {
 
     try {
-        /*const response = await ocrSpace(
+        const response = await ocrSpace(
             'data:image/png;'+image,
             {
                 apiKey: process.env.OCR_API_KEY,
@@ -43,16 +43,6 @@ async function doScan(image) {
             }
         )
         return parseIngredients(response.ParsedResults[0].ParsedText);
-        */
-       return [
-          'harina de trigo enriquecida ley',
-          'azúcar',
-          'margarina',
-          'agua',
-          'sal',
-          'esencia ardiicial de vainilla',
-          'asdadasdadadadas'
-        ]
         
     } catch (e) {
         console.log(e);
