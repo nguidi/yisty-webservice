@@ -56,7 +56,7 @@ async function queryIngredients(db, user_food_preference_id, ingredients) {
     // food_preferences.id as preference_id, food_preferences.name as preference_name,
     let fields = `ingredients.id as id, ingredients.name as name, food_preference_id <> ${user_food_preference_id} OR food_preference_id is NULL as result`;
     let joins = "forbidden_ingredients ON ingredients.id = ingredient_id LEFT OUTER JOIN food_preferences ON food_preference_id = food_preferences.id";
-    let queries = ingredients.map(ingredient => {return `SELECT ${fields}, levenshtein(ingredients.name, '${ingredient}') as score FROM ingredients LEFT OUTER JOIN ${joins} ORDER BY score ASC LIMIT 1`;})
+    let queries = ingredients.map(ingredient => {return `SELECT ${fields}, levenshtein(lower(ingredients.name), lower('${ingredient}')) as score FROM ingredients LEFT OUTER JOIN ${joins} ORDER BY score ASC LIMIT 1`;})
         
     let opts = { type: sequelize.QueryTypes.SELECT, raw: true };
     let result = (await Promise.all(queries.map(q => {return db.query(q, opts)}))).flat()
