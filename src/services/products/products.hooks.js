@@ -30,10 +30,15 @@ async function populateProductFoodPreference(context) {
 
   let dataToTransform = (Array.isArray(context.result)) ? context.result : (context.result.data || [context.result]) ;
 
+  console.log(dataToTransform)
+
   dataToTransform = await Promise.all(dataToTransform.map( async product => {
-    product.foodPreference = (await context.app.service('products_food_preferences').find({ query: { product_id: product.id, food_preference_id: foodPreference }})).data.pop().result;
+    let aux = (await context.app.service('products_food_preferences').find({ query: { product_id: product.id, food_preference_id: foodPreference }}))
+    product.foodPreference = (aux.data.length > 0) ? aux.data.pop().result : undefined;
     return product;
   }));
+
+  console.log("b",dataToTransform)
 
   if (Array.isArray(context.result)) {
     context.result = dataToTransform;
