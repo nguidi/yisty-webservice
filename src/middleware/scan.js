@@ -29,7 +29,7 @@ async function streamToBase64(stream) {
 async function doScan(image) {
 
     try {
-        const response = await ocrSpace(
+        /*const response = await ocrSpace(
             'data:image/png;'+image,
             {
                 apiKey: process.env.OCR_API_KEY,
@@ -43,6 +43,17 @@ async function doScan(image) {
             }
         )
         return parseIngredients(response.ParsedResults[0].ParsedText);
+        */
+       return [
+          'harina de trigo enriquecida ley',
+          'azúcar',
+          'margarina',
+          'agua',
+          'sal',
+          'esencia ardiicial de vainilla',
+          'asdadasdadadadas'
+        ]
+        
     } catch (e) {
         console.log(e);
         return e;
@@ -50,20 +61,22 @@ async function doScan(image) {
 }
 
 async function queryIngredients(db, user_food_preference_id, ingredients) {
+    //console.log(ingredients)
+
     // food_preferences.id as preference_id, food_preferences.name as preference_name,
     let fields = `ingredients.id as id, ingredients.name as name, food_preference_id <> ${user_food_preference_id} OR food_preference_id is NULL as result`;
     let joins = "forbidden_ingredients ON ingredients.id = ingredient_id LEFT OUTER JOIN food_preferences ON food_preference_id = food_preferences.id";
-    let queries = ingredients.map(ingredient => {return `SELECT ${fields} FROM ingredients LEFT OUTER JOIN ${joins} ORDER BY levenshtein(ingredients.name, '${ingredient}') ASC LIMIT 1`;})
+    let queries = ingredients.map(ingredient => {return `SELECT ${fields}, levenshtein(ingredients.name, '${ingredient}') as score FROM ingredients LEFT OUTER JOIN ${joins} ORDER BY score ASC LIMIT 1`;})
         
     let opts = { type: sequelize.QueryTypes.SELECT, raw: true };
     let result = (await Promise.all(queries.map(q => {return db.query(q, opts)}))).flat()
-
-    for (let i of ingredients) {
-        if (!result.map(r => r.name).includes(i)) {
-            result.push({ id: null, name: i, result: null })
-        }
-    }
-
+    
+    result = result.map( (r,i) => { 
+        return  (r.score > 3)
+                ?   Object.assign(r,{ id: null, name: ingredients[i], result: null})
+                :   r
+    })
+ 
     return result;
     /*
     let params = ingredients.map((p) => "%" + p + "%");
