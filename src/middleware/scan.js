@@ -29,6 +29,7 @@ async function streamToBase64(stream) {
 async function doScan(image) {
 
     try {
+        
         const response = await ocrSpace(
             'data:image/png;'+image,
             {
@@ -42,7 +43,12 @@ async function doScan(image) {
                 OCREngine: 2
             }
         )
-        return parseIngredients(response.ParsedResults[0].ParsedText);
+        
+        if (response.OCRExitCode == 4) {
+            throw response.ErrorMessage
+        }
+
+        return  parseIngredients(response.ParsedResults[0].ParsedText);
         
     } catch (e) {
         console.log(e);
@@ -62,7 +68,7 @@ async function queryIngredients(db, user_food_preference_id, ingredients) {
     let result = (await Promise.all(queries.map(q => {return db.query(q, opts)}))).flat()
     
     result = result.map( (r,i) => { 
-        return  (r.score > 3)
+        return  (r.score > 5)
                 ?   Object.assign(r,{ id: null, name: ingredients[i], result: null})
                 :   r
     })
@@ -141,13 +147,15 @@ let handler = (app) => {
     return async(req, res) => {
         let scannedText = "";
         try {
+            
             scannedText = await streamToBase64(req).then((image) => {
+                
                 return doScan(image);
             });
-
+            
             let user_food_preference = req.user.food_preference.id
             let result = await queryIngredients(db, user_food_preference, scannedText);
-
+            
             res
                 .writeHead(200, { "Content-Type": "application/json" })
                 .end(JSON.stringify(result));
